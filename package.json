@@ -1,0 +1,31 @@
+{
+  "name": "event-days",
+  "version": "0.1.0",
+  "description": "Time slot scheduling classes relative to months as storage units",
+  "main": "index.js",
+  "directories": {
+    "lib": "lib",
+    "test": "test"
+  },
+  "scripts": {
+    "test": "node test/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rleddy/event-days.git"
+  },
+  "bugs": {
+    "url": "https://github.com/rleddy/event-day/issues"
+  },
+  "homepage": "https://github.com/rleddy/event-day#readme",
+  "keywords": [
+    "events",
+    "calendar",
+    "schedule"
+  ],
+  "author": "R. Leddy",
+  "license": "MIT",
+  "dependencies": {
+    "calendar": "github:rleddy/calendar.js"
+  }
+}

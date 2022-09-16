@@ -13,7 +13,7 @@ let MonthContainer = require('../lib/month-container')
 let TimeLine = require('../lib/time-line')
 
 // ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ----
-let show_out = false
+let show_output = false
 function traceMethodCalls(obj)
 {
     return new Proxy(obj, {
@@ -26,7 +26,7 @@ function traceMethodCalls(obj)
                 let b = JSON.stringify(args,null,2)
                 fs.appendFileSync("test-output.txt",b)
                 // call origin method
-                if ( show_out ) {
+                if ( show_output ) {
                     return originMethod.apply(this, args);
                 } else {
                     return false
@@ -157,7 +157,7 @@ fs.appendFileSync("test-output.txt",out)
 
 // ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ----
 
-show_out = true
+show_output = true
 /*
     TimeLine
 */
@@ -199,9 +199,22 @@ async function test_time_line() {
     let bb = tl.missing_adjacent_start_times(ts_start - ONE_MONTH*3)
     console.log(bb)
     
+    show_output = false
     // 
     await tl.injest_month(bb[0])
     console.dir(tl.in_app_month_store)
+
+    await tl.scroll_right(2)
+    console.dir(tl.in_app_month_store)
+
+    show_output = true
+
+    await tl.scroll_left(2)
+    console.dir(tl.in_app_month_store)
+
+    await tl.scroll_right(10)
+    console.dir(tl.in_app_month_store)
+    console.dir(tl.month_start_time_window)
 }
 
 

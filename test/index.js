@@ -154,7 +154,6 @@ out = JSON.stringify(moc.cal.map,null,2)
 fs.appendFileSync("test-output.txt",out)
 
 
-
 // ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ----
 
 show_output = true
@@ -164,6 +163,8 @@ show_output = true
 
 console.log("Running Time Line Test")
 let tl = new TimeLine({
+    time_line_fetcher : () => {},
+    time_line_sender : (all_events,a_t_slot) => {},
     fetcher : {  // a class
         get : (start_time_list) => {
             console.log("fetching months")

@@ -23,7 +23,7 @@ const {TimeLine} = require('event-days')
 
 ### [TimeSlot](#)
 
-**node.js**
+With ***node.js***
 ```
 const {TimeSlot} = require('event-days')
 ```
@@ -31,7 +31,7 @@ const {TimeSlot} = require('event-days')
 
 ### [TimeSlotAgenda](#)
 
-**node.js**
+With **node.js**
 ```
 const {TimeSlotAgenda} = require('event-days')
 ```
@@ -39,7 +39,7 @@ const {TimeSlotAgenda} = require('event-days')
 
 ### [MonthContainer](#)
 
-**node.js**
+With **node.js**
 ```
 const {MonthContainer} = require('event-days')
 ```

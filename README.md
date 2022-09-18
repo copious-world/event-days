@@ -13,9 +13,9 @@ npm install i --save event-days
 
 ## Classes and Methods
 
-<span style="color:navy;font-weight:900;font-size:20px" >
+<strong style="color:navy;font-weight:900;font-size:20px" >
 TimeLine
-</span>
+</strong>
 
 **node.js**
 ```

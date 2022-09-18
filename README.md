@@ -23,9 +23,9 @@ const {TimeLine} = require('event-days')
 ```
 
 
-<span style="color:navy;font-weight:900;font-size:20px" >
+<strong style="color:navy;font-weight:900;font-size:20px" >
 TimeSlot
-</span>
+</strong>
 
 **node.js**
 ```
@@ -33,9 +33,9 @@ const {TimeSlot} = require('event-days')
 ```
 
 
-<span style="color:navy;font-weight:900;font-size:20px" >
+<strong style="color:navy;font-weight:900;font-size:20px" >
 TimeSlotAgenda
-</span>
+</strong>
 
 **node.js**
 ```
@@ -44,9 +44,9 @@ const {TimeSlotAgenda} = require('event-days')
 
 
 
-<span style="color:navy;font-weight:900;font-size:20px" >
+<strong style="color:navy;font-weight:900;font-size:20px" >
 MonthContainer
-</span>
+</strong>
 
 **node.js**
 ```

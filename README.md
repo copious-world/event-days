@@ -21,7 +21,7 @@ const {TimeLine} = require('event-days')
 ```
 
 
-### [TimeSlot](#)
+### [TimeSlot](#timeslot-methods)
 
 With ***node.js***
 ```
@@ -29,7 +29,7 @@ const {TimeSlot} = require('event-days')
 ```
 
 
-### [TimeSlotAgenda](#)
+### [TimeSlotAgenda](#timeslotagenda-methods)
 
 With ***node.js***
 ```
@@ -50,12 +50,12 @@ const {MonthContainer} = require('event-days')
 
 ### TimeLine Methods
 
-* [`constructor(conf)`](timeline-constructor)
-* [`async injest_month(start_time)`](timeline-injest-month)
-* `async scroll_right(n)`
-* `async scroll_left(n)`
-* `remove_slot_everywhere(label)`
-* `save_time_list(do_send_months)`
+* [`constructor(conf)`](#timeline-constructor)
+* [`async injest_month(start_time)`](#timeline-injest-month)
+* [`async scroll_right(n)`](#timeline-scroll_right)
+* [`async scroll_left(n)`](#timeline-scroll_left)
+* [`remove_slot_everywhere(label)`](#timeline-remove_slot_everywhere)
+* [`save_time_list(do_send_months)`](#timeline-save_time_list)
 
 
 #### <u>TimeLine Constructor</u>
@@ -65,16 +65,45 @@ const {MonthContainer} = require('event-days')
 
 Here is a list of definitions for the methods that should be supplied with the configuration.
 
-#### <u>TimeLine injest month </u>
+#### <u>TimeLine injest month</u>
+
+> TBD
+
+#### <u>TimeLine scroll_right</u>
+
+> TBD
+
+#### <u>TimeLine scroll_left</u>
+
+> TBD
+
+#### <u>TimeLine remove_slot_everywhere</u>
+
+> TBD
+
+#### <u>TimeLine save_time_list </u>
 
 > TBD
 
 
+
+### TimeSlot Methods
+
+* [`constructor(conf)`](#monthcontainer-constructor)
+
+
+### TimeSlotAgenda Methods
+
+* [`constructor(conf)`](#monthcontainer-constructor)
+
+
 ### MonthContainer Methods
 
-* [`constructor(conf)`](month-constructor)
+* [`constructor(conf)`](#monthcontainer-constructor)
 * `add_agenda_list(day_agenda)`
 * `add_time_slot(a_t_slot)`
 * `remove_time_slot(start_time)`
 * `remove_all_of_time_slot(a_t_slot)`
+
+#### <u> MonthContainer Constructor</u>
 

@@ -26,6 +26,6 @@
   "author": "R. Leddy",
   "license": "MIT",
   "dependencies": {
-    "calendar": "github:rleddy/calendar.js"
+    "calendar-es6": "^0.1.3"
   }
 }

@@ -13,10 +13,7 @@ npm install i --save event-days
 
 ## Classes and Methods
 
-<strong style="font-weight:900;font-size:20px" >
-[TimeLine](#)
-</strong>
-
+### [TimeLine](#)
 
 **node.js**
 ```
@@ -24,9 +21,7 @@ const {TimeLine} = require('event-days')
 ```
 
 
-<strong style="font-weight:900;font-size:20px" >
-[TimeSlot](#)
-</strong>
+### [TimeSlot](#)
 
 **node.js**
 ```
@@ -34,9 +29,7 @@ const {TimeSlot} = require('event-days')
 ```
 
 
-<strong style="font-weight:900;font-size:20px" >
-[TimeSlotAgenda](#)
-</strong>
+### [TimeSlotAgenda](#)
 
 **node.js**
 ```
@@ -44,9 +37,7 @@ const {TimeSlotAgenda} = require('event-days')
 ```
 
 
-<strong style="font-weight:900;font-size:20px" >
-[MonthContainer](#)
-</strong>
+### [MonthContainer](#)
 
 **node.js**
 ```

@@ -103,6 +103,10 @@ Here is a list of definitions for the methods that should be supplied with the c
 * [`merge_with(a_time_slot)`](#timeslot-merge-with)
 * [`grow_sooner_days(num_days)`](#timeslot-grow-sooner-days)
 * [`split(start_of_split,end_of_split)`](#timeslot-split)
+* [`shift_slots(delta)`](#timeslot-shift-slots)
+* [`drop_by_pattern(pat_fun)`](#timeslot-drop-by-pattern)
+* [`merge_with_overlap(a_time_slot)`](#timeslot-merge-with-overlap)
+
 
 
 #### *TimeSlot* <u>Constructor</u>
@@ -141,21 +145,35 @@ Here is a list of definitions for the methods that should be supplied with the c
 
 #### *TimeSlot* <u>grow sooner days</u>
 
-Prepends the list, each\_day, with the copies of the first day of the list for the number of days specified in the parameter.
+>Prepends the list, each\_day, with the copies of the first day of the list for the number of days specified in the parameter.
 
 #### *TimeSlot* <u>grow later days</u>
 
-Appends the list, each\_day, with the copies of the last day of the list for the number of days specified in the parameter.
+>Appends the list, each\_day, with the copies of the last day of the list for the number of days specified in the parameter.
 
 
 #### *TimeSlot* <u>grow later days</u>
 
-Appends the list, each\_day, with the copies of the last day of the list for the number of days specified in the parameter.
+>Appends the list, each\_day, with the copies of the last day of the list for the number of days specified in the parameter.
 
 
 #### *TimeSlot* <u>split</u>
 
-Splits a TimeSlot into two TimeSlots and returns them. If the times `start_of_split` and `end_of_split`, cover a spot in the middle of the TimeSlot's original expanse two new TimeSlots are returned as a pair `[earlier,later]`.  If the times cut off the a section at the beginning, then earlier of the pair will be false. If the end is cut off, then later of the pair will be false.
+>Splits a TimeSlot into two TimeSlots and returns them. If the times `start_of_split` and `end_of_split`, cover a spot in the middle of the TimeSlot's original expanse two new TimeSlots are returned as a pair `[earlier,later]`.  If the times cut off the a section at the beginning, then earlier of the pair will be false. If the end is cut off, then later of the pair will be false.
+
+
+#### *TimeSlot* <u>merge with overlap</u>
+
+>Given a TimeSlot parameter, appends all the Slots of the given TimeSlot to the calling TimeSlot and then sorst the result each\_day list by start time.
+
+#### *TimeSlot* <u>shift slots</u>
+
+>The parameter to this method is a time delta which is added both to the `begin_at` and the `end_at` fields of every Slot in the eadh\_day list.
+
+#### *TimeSlot* <u>drop by pattern</u>
+
+> The parameter to this method is a function (lambda) returning true if a given slot matches a pattern, false otherwise. The lambda parameter is passed to the JavaScript Array.filter method. 
+
 
 
 ### TimeSlotAgenda Methods

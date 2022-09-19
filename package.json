@@ -1,6 +1,6 @@
 {
   "name": "event-days",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Time slot scheduling classes relative to months as storage units",
   "main": "index.js",
   "directories": {

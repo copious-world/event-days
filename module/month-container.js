@@ -1,4 +1,4 @@
-import {Calendar} from '../rolled/calendar.js'
+import {Calendar} from 'calendar-es6'
 import {TimeSlotAgenda} from './time-slot-agenda.js'
 import {first_day_of_month,calc_days} from './utilities.js'
 

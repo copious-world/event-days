@@ -7,9 +7,41 @@ The data structures calendars, event day lists, time slots which may be within a
 
 ## Install 
 
+For use in node.js projects:
+
 ```
 npm install i --save event-days
 ```
+
+In your node.js program you can access classes in the following manner:
+
+```
+	const {EventDays} = require('event-days')
+
+	let MonthContainer = EventDays.MonthContainer
+```
+
+
+## Web Page Use
+
+A rollup.config.js file has been added to the package. The npm package should be released after running `npm run build`. (That is best effort.)
+
+Builds that use rollup may simply include event-days in their devDependencies field within package.json. It may help to run a second npm install a such:
+
+```
+npm install i --save-dev event-days
+```
+
+**Example**: This class is being used in a Svelte project. The module is included in an App.svelte file as follows:
+
+```
+	import {EventDays} from 'event-days'
+
+	let MonthContainer = EventDays.MonthContainer
+```
+
+From there, the **MonthContainer** may be created and used as needed by the application.
+
 
 ## Classes and Methods
 
@@ -252,4 +284,42 @@ Here is a list of definitions for the methods that should be supplied with the c
 > This method removes all slots from a MonthContainer that match with Slot begin\_at times belonging to the Slots stored in the TimeSlot each\_day list.
 > 
 
+##Customization
 
+There are a few classes that may be basic to an application's information storage requirements. These are the following:
+
+* **Slot**
+* **TimeSlotAgenda**
+
+These classes offer basic fields and methods for their use within the context of MonthContainers and TimeLines.
+
+By extending these classes, an application can store all the information needed to fit its requirements. The extending class can be passed as a last parameter to constructors. Passing the last parameter will provide the use of the extending class only if it actually extends the classes. The constructors default to the basic verion if the classes passed are not descendants of these classes. 
+
+For example, an application can extend a Slot:
+
+```
+import {EventDays} from 'event-days'
+
+const Slot = EventDays.Slot
+
+class SpecialSlot extends Slot {
+	constructor(label,start_time,end_time) {
+		super(label,start_time,end_time)
+		
+		this.special_field = "special value"
+	}
+}
+
+```
+
+Next, the SpecialSlot class can be used in the creation of a TimeSlot.
+
+```
+const TimeSlot = EventDays. TimeSlot
+
+
+let a_t_slot = new TimeSlot("label", TimeSLot.USE_AS_OPEN,
+									start_time, end_time, false, 1.0, false,
+									daily_dur, false, SpecialSlot)
+
+```

@@ -964,7 +964,8 @@
         TimeLine,
         TimeSlotAgenda,
         MonthContainer,
-        TimeSlot
+        TimeSlot,
+        Slot
     };
 
     exports.EventDays = EventDays;

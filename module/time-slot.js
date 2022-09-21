@@ -5,7 +5,7 @@ import {hours_of,calc_days,same_day} from './utilities.js'
 const TWENTY_FOUR = 24*3600*1000
 
 
-class Slot {
+export class Slot {
 
     constructor(label,begin_t,end_t) {
         this.begin_at = begin_t ? begin_t : 0
@@ -31,7 +31,7 @@ export class TimeSlot {
     static USE_AS_ACTIVITY = "activity"
     static USE_AS_OPEN = "open"
 
-    constructor(label,use_case,start_time,end_time,break_apart,importance,weekends,daily_dur,filler) {
+    constructor(label,use_case,start_time,end_time,break_apart,importance,weekends,daily_dur,filler,SlotClass) {
         this.start_time = start_time    // may be months apart
         this.end_time = end_time
         this.break_apart = break_apart
@@ -41,6 +41,12 @@ export class TimeSlot {
         this.daily_duration = daily_dur ? daily_dur : ((same_day(start_time,end_time)) ? (end_time - start_time) : 0)
         this.label = label
         this.each_day = []   /// constructed finally in init...
+        //
+        this.slot_maker = ( SlotClass !== undefined ) ? SlotClass : Slot
+        if ( ( SlotClass !== undefined ) && !(SlotClass.prototype instanceof Slot) ) {
+            this.slot_maker = Slot
+        }
+        //
         this.init(filler)
     }
 
@@ -51,10 +57,10 @@ export class TimeSlot {
         this.lapse_days = this.lapse_hr/24
         this.lapse_mo = this.lapse_days/30 /// this approximate
         //
-        if ( filler === undefined ) {
+        if ( (filler === undefined) || (filler === false) ) {
             this.each_day = []
             for ( let i = 0; i < this.lapse_days; i++ ) {
-                this.each_day.push(new Slot(this.label))
+                this.each_day.push(new this.slot_maker(this.label))
             }
         } else {
             this.each_day = Array.from(Array(this.lapse_days),filler);
@@ -169,7 +175,7 @@ export class TimeSlot {
     grow_sooner_days(num_days) {
         let first_day = this.each_day[0]
         for ( let i = 0; i < num_days; i++ ) {
-            let a_slot = new Slot(this.label,first_day.begin_at,first_day.end_at)
+            let a_slot = new this.slot_maker(this.label,first_day.begin_at,first_day.end_at)
             this.each_day.unshift(a_slot)
         }
         this.#sort_slots()
@@ -178,7 +184,7 @@ export class TimeSlot {
     grow_later_days(num_days) {
         let last_day = this.each_day[this.each_day.length-1]
         for ( let i = 0; i < num_days; i++ ) {
-            let a_slot = new Slot(this.label,last_day.begin_at,last_day.end_at)
+            let a_slot = new this.slot_maker(this.label,last_day.begin_at,last_day.end_at)
             a_slot.begin_at = last_day.begin_at
             a_slot.end_at = last_day.end_at
             this.each_day.push(a_slot)

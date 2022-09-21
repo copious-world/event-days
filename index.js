@@ -284,7 +284,7 @@
     class MonthContainer {
 
         // ----
-        constructor(start_time) {
+        constructor(start_time,AgendaClass) {
             if ( Array.isArray(start_time) ) {
                 this.date = new Date(...start_time);
             } else {
@@ -294,7 +294,13 @@
             this.year = this.date.getFullYear();
             this.month = this.date.getMonth();
             if ( isNaN(this.year) || isNaN(this.month) ) throw "Nan for year or month in MontainContainer constructor"
-            this.cal = g_cal.monthMap(this.year, this.month, TimeSlotAgenda);
+            //
+            this.agenda_maker = (AgendaClass !== undefined) ? AgendaClass : TimeSlotAgenda;
+            if ( (AgendaClass !== undefined) && !(AgendaClass.prototype instanceof TimeSlotAgenda) ) {
+                this.agenda_maker = TimeSlotAgenda;
+            }
+            //
+            this.cal = g_cal.monthMap(this.year, this.month, this.agenda_maker);
             this.init_slot_times();
             this.end_time = this.last_day_time();
         }
@@ -358,7 +364,7 @@
             if ( ts_agenda_ky ) {
                 let tsa = this.cal.map[ts_agenda_ky];
                 if ( tsa === undefined ) {
-                    tsa = new TimeSlotAgenda(day_agenda.day,idx);
+                    tsa = new this.agenda_maker(day_agenda.day,idx);
                     this.cal.map[ts_agenda_ky] = tsa;
                 }
                 //
@@ -449,10 +455,12 @@
 
     class TimeLine {
         // 
-        constructor(conf) {
+        constructor(conf,AgendaClass) {
             //
             this.in_app_month_store = {};  // all the months that have been fetched or injested
             this.month_start_time_window = []; // the window of time that have been fetched or we want fetched
+            //
+            this.agenda_maker = AgendaClass;   /// let the month container sort it out
             //
             this.all_events_labels_to_time = {
                 "example" : [0,false]  // start_time, slot data structure 
@@ -583,7 +591,7 @@
                         for ( let mo_moment in month_data ) {
                             //
                             let i_mo_moment = parseInt(mo_moment);
-                            let moc = new MonthContainer(i_mo_moment);
+                            let moc = new MonthContainer(i_mo_moment,this.agenda_maker);
                             this.in_app_month_store[mo_moment] = moc;   /// only place the missing ones
                             this.month_start_time_window.push(i_mo_moment);
                             //
@@ -704,7 +712,7 @@
         static USE_AS_ACTIVITY = "activity"
         static USE_AS_OPEN = "open"
 
-        constructor(label,use_case,start_time,end_time,break_apart,importance,weekends,daily_dur,filler) {
+        constructor(label,use_case,start_time,end_time,break_apart,importance,weekends,daily_dur,filler,SlotClass) {
             this.start_time = start_time;    // may be months apart
             this.end_time = end_time;
             this.break_apart = break_apart;
@@ -714,6 +722,12 @@
             this.daily_duration = daily_dur ? daily_dur : ((same_day(start_time,end_time)) ? (end_time - start_time) : 0);
             this.label = label;
             this.each_day = [];   /// constructed finally in init...
+            //
+            this.slot_maker = ( SlotClass !== undefined ) ? SlotClass : Slot;
+            if ( ( SlotClass !== undefined ) && !(SlotClass.prototype instanceof Slot) ) {
+                this.slot_maker = Slot;
+            }
+            //
             this.init(filler);
         }
 
@@ -724,10 +738,10 @@
             this.lapse_days = this.lapse_hr/24;
             this.lapse_mo = this.lapse_days/30; /// this approximate
             //
-            if ( filler === undefined ) {
+            if ( (filler === undefined) || (filler === false) ) {
                 this.each_day = [];
                 for ( let i = 0; i < this.lapse_days; i++ ) {
-                    this.each_day.push(new Slot(this.label));
+                    this.each_day.push(new this.slot_maker(this.label));
                 }
             } else {
                 this.each_day = Array.from(Array(this.lapse_days),filler);
@@ -842,7 +856,7 @@
         grow_sooner_days(num_days) {
             let first_day = this.each_day[0];
             for ( let i = 0; i < num_days; i++ ) {
-                let a_slot = new Slot(this.label,first_day.begin_at,first_day.end_at);
+                let a_slot = new this.slot_maker(this.label,first_day.begin_at,first_day.end_at);
                 this.each_day.unshift(a_slot);
             }
             this.#sort_slots();
@@ -851,7 +865,7 @@
         grow_later_days(num_days) {
             let last_day = this.each_day[this.each_day.length-1];
             for ( let i = 0; i < num_days; i++ ) {
-                let a_slot = new Slot(this.label,last_day.begin_at,last_day.end_at);
+                let a_slot = new this.slot_maker(this.label,last_day.begin_at,last_day.end_at);
                 a_slot.begin_at = last_day.begin_at;
                 a_slot.end_at = last_day.end_at;
                 this.each_day.push(a_slot);

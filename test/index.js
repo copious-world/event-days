@@ -7,7 +7,7 @@ const ONE_WEEK = 7*TWENTY_FOUR
 const ONE_MONTH = 4*ONE_WEEK
 const MIN15 = 15*60*1000
 
-let TimeSlot = require('../lib/time-slot')
+let {TimeSlot,Slot} = require('../lib/time-slot')
 let TimeSlotAgenda = require('../lib/time-slot-agenda')
 let MonthContainer = require('../lib/month-container')
 let TimeLine = require('../lib/time-line')
@@ -48,7 +48,15 @@ let ts_end = ts_start + ONE_WEEK
 
 // ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ----
 
-let moc = new MonthContainer(ts_start)
+class TSlot extends Slot {
+    constructor(label,begin_at,end_at) {
+        super(label,begin_at,end_at)
+
+        this.t_value = "this is a test"
+    }
+}
+
+let moc = new MonthContainer(ts_start,TSlot)
 
 let runtime = new Date()
 

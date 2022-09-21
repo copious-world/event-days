@@ -33,7 +33,7 @@ function overlap(a_month,a_slot) {
 export class MonthContainer {
 
     // ----
-    constructor(start_time) {
+    constructor(start_time,AgendaClass) {
         if ( Array.isArray(start_time) ) {
             this.date = new Date(...start_time)
         } else {
@@ -43,7 +43,13 @@ export class MonthContainer {
         this.year = this.date.getFullYear()
         this.month = this.date.getMonth()
         if ( isNaN(this.year) || isNaN(this.month) ) throw "Nan for year or month in MontainContainer constructor"
-        this.cal = g_cal.monthMap(this.year, this.month, TimeSlotAgenda)
+        //
+        this.agenda_maker = (AgendaClass !== undefined) ? AgendaClass : TimeSlotAgenda
+        if ( (AgendaClass !== undefined) && !(AgendaClass.prototype instanceof TimeSlotAgenda) ) {
+            this.agenda_maker = TimeSlotAgenda
+        }
+        //
+        this.cal = g_cal.monthMap(this.year, this.month, this.agenda_maker)
         this.init_slot_times()
         this.end_time = this.last_day_time()
     }
@@ -107,7 +113,7 @@ export class MonthContainer {
         if ( ts_agenda_ky ) {
             let tsa = this.cal.map[ts_agenda_ky]
             if ( tsa === undefined ) {
-                tsa = new TimeSlotAgenda(day_agenda.day,idx)
+                tsa = new this.agenda_maker(day_agenda.day,idx)
                 this.cal.map[ts_agenda_ky] = tsa
             }
             //

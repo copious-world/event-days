@@ -1,6 +1,6 @@
 {
   "name": "event-days",
-  "version": "0.1.5",
+  "version": "0.1.6",
   "description": "Time slot scheduling classes relative to months as storage units",
   "module": "./dist/index.mjs",
   "main": "index.js",
@@ -35,7 +35,7 @@
     "@rollup/plugin-node-resolve": "^9.0.0",
     "rollup": "^2.0.0",
     "rollup-plugin-svelte": "^6.0.0",
-    "calendar-es6": "^0.1.4"
+    "calendar-es6": "^0.1.6"
   },
   "files": [
     "src",

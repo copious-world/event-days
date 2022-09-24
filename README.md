@@ -284,7 +284,7 @@ Here is a list of definitions for the methods that should be supplied with the c
 > This method removes all slots from a MonthContainer that match with Slot begin\_at times belonging to the Slots stored in the TimeSlot each\_day list.
 > 
 
-##Customization
+## Customization
 
 There are a few classes that may be basic to an application's information storage requirements. These are the following:
 
@@ -317,9 +317,7 @@ Next, the SpecialSlot class can be used in the creation of a TimeSlot.
 ```
 const TimeSlot = EventDays. TimeSlot
 
-
 let a_t_slot = new TimeSlot("label", TimeSLot.USE_AS_OPEN,
-									start_time, end_time, false, 1.0, false,
-									daily_dur, false, SpecialSlot)
-
+                              start_time, end_time, false, 1.0, false,
+                              daily_dur, false, SpecialSlot)
 ```

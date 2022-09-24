@@ -1,6 +1,6 @@
 {
   "name": "event-days",
-  "version": "0.1.6",
+  "version": "0.1.7",
   "description": "Time slot scheduling classes relative to months as storage units",
   "module": "./dist/index.mjs",
   "main": "index.js",
@@ -15,12 +15,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/rleddy/event-days.git"
+    "url": "git+https://github.com/copious-world/event-days.git"
   },
   "bugs": {
-    "url": "https://github.com/rleddy/event-day/issues"
+    "url": "https://github.com/copious-world/event-day/issues"
   },
-  "homepage": "https://github.com/rleddy/event-day#readme",
+  "homepage": "https://github.com/copious-world/event-day#readme",
   "keywords": [
     "events",
     "calendar",

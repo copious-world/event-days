@@ -283,6 +283,13 @@
         return false
     }
 
+    function key_ordering(k1,k2) {
+        let k1_parts = k1.split(',')
+        let k2_parts = k2.split(',')
+        let dif = parseInt(k1_parts[0]) - parseInt(k2_parts[1])
+        return dif
+    }
+
 
     // ---- MonthContainer
     class MonthContainer {
@@ -313,7 +320,7 @@
             let st = this.start_time;
             let access_tsa = this.cal.map;
             let tsa_keys = Object.keys(access_tsa);
-            tsa_keys.sort();
+            tsa_keys.sort(key_ordering);
             for ( let key of tsa_keys ) {
                 let tsa = access_tsa[key];
                 if ( tsa ) {
